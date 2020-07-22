@@ -2,12 +2,9 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as models from '../models/index';
 
-interface User {
-    firstName: String,
-    lastName: String,
-    email: String
-}
+
 
 // initialize Firebase 
 admin.initializeApp(functions.config().firebase);
@@ -29,7 +26,7 @@ export const webApi= functions.https.onRequest(main);
 // Create new user
 app.post('/users', async (req, res) => {
     try {
-        const user: User = {
+        const user: models.User = {
             firstName: req.body['firstName'],
             lastName: req.body['lastName'],
             email: req.body['email']
